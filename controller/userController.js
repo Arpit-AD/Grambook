@@ -71,36 +71,72 @@ exports.editUser = (req , res) =>
         }) 
 }
 
-exports.userLogin = (req,res) =>{
+// exports.userLogin = (req,res) =>{
     
-    const {email,password} = req.body;
-    if( !email || !password ) {
-        res.status(422).json({ message: "Provide Email and Password"})
+//     const {email,password} = req.body;
+//     if( !email || !password ) {
+//         res.status(422).json({ message: "Provide Email and Password"})
+//     }
+
+//     User.findOne({email:email})
+//     .then(savedUser => {
+//         if (!savedUser){
+//            res.status(422).json({message: "Invalid email or password"})  
+//         }
+
+//         bcrypt.compare(password, savedUser.password)
+//         .then( doMatch =>{
+
+//             if (doMatch)
+//             {
+//                 // res.json({ message: "successfully logged in"})
+//                 const token = jwt.sign({_id:savedUser._id}, JWT_SECRET)
+//                 res.json({user: savedUser, token})
+//             }
+//             else{
+//                 res.status(422).json({message: "Invalid email or Password"}) 
+//             }
+//         })
+//     })
+//     .catch(err => {
+//         console.log(err)
+//         res.status(500).json({ messsage: "Invalid email or Password" })
+//     }) 
+// }
+
+
+exports.userLogin = (req, res) => {
+    const { email, password } = req.body;
+  
+    if (!email || !password) {
+      return res.status(422).json({ error: "Please add email and password" });
     }
-
-    User.findOne({email:email})
-    .then(savedUser => {
-        if (!savedUser){
-           res.status(422).json({message: "Invalid email or password"})  
-        }
-
-        bcrypt.compare(password, savedUser.password)
-        .then( doMatch =>{
-
-            if (doMatch)
-            {
-                // res.json({ message: "successfully logged in"})
-                const token = jwt.sign({_id:savedUser._id}, JWT_SECRET)
-                res.json({user: savedUser, token})
-            }
-            else{
-                res.status(422).json({message: "Invalid email or Password"}) 
-            }
+    User.findOne({ email: email }).then((savedUser) => {
+      if (!savedUser) {
+        return res.status(422).json({ error: "Invalid email or password" });
+      }
+  
+      bycrypt
+        .compare(password, savedUser.password)
+        .then((doMatch) => {
+          if (!doMatch) {
+            return res.status(422).json({ error: "Invalid email or password" });
+          } else {
+            const token = jwt.sign({ _id: savedUser.id }, JWT_SECRET);
+            const { _id, name, email } = savedUser;
+            res.json({
+              user: {
+                _id,
+                name,
+                email,
+              },
+              token,
+            });
+          }
         })
-    })
-    .catch(err => {
-        console.log(err)
-        res.status(500).json({ messsage: "Invalid email or Password" })
-    }) 
-}
-
+        .catch((err) => {
+          console.log(err);
+          return res.status(500).json({ error: "Could not sign in" });
+        });
+    });
+  };
