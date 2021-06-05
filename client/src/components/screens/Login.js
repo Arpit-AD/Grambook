@@ -21,9 +21,9 @@ const Login = () => {
         }
         fetch("https://grambook.herokuapp.com/user/login", {
         method: "post",
-        headers: {
-            "Content-Type": "application/json",
-        },
+        // headers: {
+        //     // "Content-Type": "application/json",
+        // },
         body: JSON.stringify({
             password,
             email,
