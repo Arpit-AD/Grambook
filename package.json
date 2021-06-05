@@ -1,0 +1,20 @@
+{
+  "name": "grambook",
+  "version": "1.0.0",
+  "description": "Social Media",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
+  "author": "Arpit_ad",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.12",
+    "multer": "^1.4.2"
+  }
+}
