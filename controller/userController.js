@@ -116,7 +116,7 @@ exports.userLogin = (req, res) => {
         return res.status(422).json({ error: "Invalid email or password" });
       }
   
-      bycrypt
+      bcrypt
         .compare(password, savedUser.password)
         .then((doMatch) => {
           if (!doMatch) {
