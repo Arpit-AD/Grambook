@@ -9,7 +9,7 @@ const Profile = () => {
     const { state, dispatch } = useContext(UserContext);
   
     useEffect(() => {
-      fetch("/post/getpostbyuser", {
+      fetch("https://grambook.herokuapp.com/post/getpostbyuser", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("jwt"),
         },
@@ -38,7 +38,7 @@ const Profile = () => {
             <div className = "gallery" style={{display: "flex"}}>
             {data && data.map(post => 
                 <div style={{width: "32%"}} key={data._id}>
-               { post.image && <img className= "item" src={`/${post.image}`}></img>}
+               { post.image && <img className= "item" src={`https://grambook.herokuapp.com/${post.image}`}></img>}
                 <div>{post.caption}</div>
                 <div>{post.location}</div>
                 </div>

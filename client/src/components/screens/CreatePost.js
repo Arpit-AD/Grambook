@@ -19,7 +19,7 @@ const CreatePost = () => {
         formData.append("caption",caption)
         formData.append("image",image)
         console.log(image);
-        fetch("/post/create", {
+        fetch("https://grambook.herokuapp.com/post/create", {
           method: "post",
           headers: {
             // "Content-Type": "mutiple/json",

@@ -8,7 +8,7 @@ const Home = () => {
     const { state, dispatch } = useContext(UserContext);
   
     useEffect(() => {
-      fetch("/post/getpost", {
+      fetch("https://grambook.herokuapp.com/post/getpost", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("jwt"),
         },
@@ -35,7 +35,7 @@ const Home = () => {
                 <div className= "card home-card" key={post._id}>
                     <h5> {post.postedBy && post.postedBy.name} </h5>
                     <div className="card-image">
-                        {post.image && <img src={`/${post.image}`}></img>}
+                        {post.image && <img src={`https://grambook.herokuapp.com/${post.image}`}></img>}
                     </div>
                     <div className="card-content" >
                     <i className="material-icons" style={{color:"red"}}>favorite</i>

@@ -19,7 +19,7 @@ const Login = () => {
             //   M.toast({ html: "Invalid email", classes: "#c62828 red darken-3" });
              return;
         }
-        fetch("/user/login", {
+        fetch("https://grambook.herokuapp.com/user/login", {
         method: "post",
         headers: {
             "Content-Type": "application/json",
