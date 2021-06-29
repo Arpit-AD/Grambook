@@ -63,8 +63,8 @@ exports.deletePost = (req , res) =>
 {
     console.log(req.body.id)
     Post.findByIdAndDelete(req.body.id)
-    .then(deletedUser => {
-        res.status(200).json({ user: deletedUser } );
+    .then(deletedpost => {
+        res.status(200).json({ post: deletedpost } );
     })
     .catch(err => {
         console.log(err);
